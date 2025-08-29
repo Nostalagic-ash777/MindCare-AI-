@@ -425,3 +425,6 @@ if __name__ == "__main__":
         db.create_all()
         print("Database initialized successfully!")
     app.run(debug=True, host='0.0.0.0', port=5000)
+@app.route('/healthz')
+def healthz():
+    return 'OK!', 200
