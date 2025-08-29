@@ -53,9 +53,10 @@ A comprehensive AI-powered mental health support application designed specifical
 
 ```
 mindcare-ai/
-├── app.py                 # Main Flask application
-├── requirements.txt       # Python dependencies
-├── .env                  # Environment variables (not in repo)
+├── Backend/
+|   ├── app.py                 # Main Flask application
+|   ├── requirements.txt       # Python dependencies
+|   ├── .env                  # Environment variables (not in repo)
 ├── templates/            # HTML templates
 │   ├── index.html        # Landing page
 │   ├── register.html     # Registration page
