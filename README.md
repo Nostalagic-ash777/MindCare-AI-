@@ -13,41 +13,7 @@ A comprehensive AI-powered mental health support application designed specifical
 - **Professional Resources**: 24/7 access to crisis hotlines and mental health resources
 - **Privacy & Security**: Confidential conversations with secure data handling
 
-## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.8 or higher
-- OpenAI API key (get one at https://platform.openai.com)
-
-### Installation
-
-1. **Clone or download the repository**
-   ```bash
-   git clone https://github.com/yourusername/mindcare-ai.git
-   cd mindcare-ai
-   ```
-
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Set up environment variables**
-   - Rename `env-file.txt` to `.env`
-   - Add your OpenAI API key and secret key:
-   ```
-   OPENAI_API_KEY=your-openai-api-key-here
-   SECRET_KEY=your-super-secret-key-change-this
-   ```
-
-4. **Run the application**
-   ```bash
-   python app.py
-   ```
-
-5. **Open your browser**
-   - Go to `http://localhost:5000`
-   - Register for a new account or use the demo login
 
 ## 📁 Project Structure
 
@@ -68,17 +34,7 @@ mindcare-ai/
 └── mindcare.db           # SQLite database (auto-generated)
 ```
 
-## 🔧 Configuration
 
-### Environment Variables
-Create a `.env` file with the following:
-
-```
-OPENAI_API_KEY=your-openai-api-key-here
-SECRET_KEY=your-super-secret-key-change-this
-FLASK_ENV=development
-FLASK_DEBUG=True
-```
 
 ### Database
 The application uses SQLite for simplicity. The database will be automatically created when you first run the application.
