@@ -21,7 +21,7 @@ login_manager.login_view = 'login'
 login_manager.login_message = 'Please log in to access this page.'
 
 # Set OpenAI API key
-openai.api_key = os.environ.get("OPENAI_API_KEY")
+HF_TOKEN.api_key = os.environ.get("HF_TOKEN")
 
 # Database Models
 class User(UserMixin, db.Model):
@@ -86,6 +86,13 @@ def detect_crisis(message):
     return len(detected_keywords) > 0, detected_keywords
 
 # AI Response Generation
+def get_chat_response(user_message):
+    # Call OpenAI or HuggingFace API here
+    response = client.chat.completions.create(
+        model="model-name",
+        messages=[{"role": "user", "content": user_message}],
+    )
+    return response.choices[0].message.content
 def generate_ai_response(user_message, user_context=None):
     """Generate AI response with safety checks"""
     
@@ -105,7 +112,7 @@ def generate_ai_response(user_message, user_context=None):
     
     # Generate AI response using OpenAI
     try:
-        if openai.api_key:
+        if HF_TOKEN.api_key:
             system_prompt = """You are MindCare AI, a compassionate mental health support chatbot designed specifically for teenagers and young adults.
 
 Guidelines:
