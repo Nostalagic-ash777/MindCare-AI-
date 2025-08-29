@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare AI - Mental Health Support for Teens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>🧠 MindCare AI</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('login') }}" class="btn btn--outline">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn--primary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert--{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Welcome to MindCare AI</h1>
+                    <p class="hero-subtitle">
+                        Your compassionate AI companion for mental health support. Available 24/7 to listen, 
+                        understand, and provide guidance during difficult times.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="{{ url_for('register') }}" class="btn btn--primary btn--large">Get Started Free</a>
+                        <a href="{{ url_for('login') }}" class="btn btn--outline btn--large">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2>How MindCare AI Supports You</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>AI Chat Support</h3>
+                        <p>Talk to our empathetic AI assistant anytime you need someone to listen. Get personalized support and coping strategies.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <h3>Mood Journaling</h3>
+                        <p>Track your daily emotions and thoughts to better understand your mental health patterns and identify triggers.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Mood Tracking</h3>
+                        <p>Monitor your emotional wellbeing with visual charts and insights to see your progress over time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧘</div>
+                        <h3>Mindfulness Exercises</h3>
+                        <p>Access guided meditation, breathing exercises, and relaxation techniques to manage stress and anxiety.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🆘</div>
+                        <h3>Crisis Support</h3>
+                        <p>Immediate access to crisis resources and professional help when you need urgent support.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Safe & Private</h3>
+                        <p>Your conversations are completely confidential and secure. Express yourself freely in a judgment-free space.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2>Mental Health Support That's Always Available</h2>
+                    <p>
+                        MindCare AI combines artificial intelligence with evidence-based mental health practices 
+                        to provide immediate, accessible support when you need it most. Whether you're dealing with 
+                        anxiety, depression, stress, or just need someone to talk to, we're here for you.
+                    </p>
+                    <div class="stats">
+                        <div class="stat">
+                            <strong>24/7</strong>
+                            <span>Always Available</span>
+                        </div>
+                        <div class="stat">
+                            <strong>100%</strong>
+                            <span>Confidential</span>
+                        </div>
+                        <div class="stat">
+                            <strong>0</strong>
+                            <span>Judgment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to start your mental health journey?</h2>
+                <p>Join thousands who have found support and hope with MindCare AI.</p>
+                <a href="{{ url_for('register') }}" class="btn btn--primary btn--large">Start Your Journey Today</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 MindCare AI. Providing compassionate mental health support.</p>
+            <p><small>This is not a substitute for professional mental health care. In crisis, call 988 or your local emergency services.</small></p>
+        </div>
+    </footer>
+</body>
+</html>

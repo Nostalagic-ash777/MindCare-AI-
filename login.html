@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MindCare AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="{{ url_for('index') }}">
+                    <h2>🧠 MindCare AI</h2>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('register') }}" class="nav-link">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert--{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to continue your mental health journey with MindCare AI.</p>
+                </div>
+                
+                <form method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username or Email</label>
+                        <input type="text" id="username" name="username" class="form-input" required 
+                               placeholder="Enter your username or email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-input" required 
+                               placeholder="Enter your password">
+                    </div>
+                    
+                    <button type="submit" class="btn btn--primary btn--full">Sign In</button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="{{ url_for('register') }}">Create one here</a></p>
+                </div>
+                
+                <div class="crisis-notice">
+                    <p><strong>🆘 In Crisis?</strong></p>
+                    <p>If you're having thoughts of suicide or self-harm, please reach out immediately:</p>
+                    <ul>
+                        <li><strong>National Suicide Prevention Lifeline:</strong> 988</li>
+                        <li><strong>Crisis Text Line:</strong> Text HOME to 741741</li>
+                        <li><strong>Emergency Services:</strong> 911</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

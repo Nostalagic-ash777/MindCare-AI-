@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MindCare AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="{{ url_for('dashboard') }}">
+                    <h2>🧠 MindCare AI</h2>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('dashboard') }}" class="nav-link active">Dashboard</a>
+                <a href="{{ url_for('chat') }}" class="nav-link">Chat</a>
+                <a href="{{ url_for('journal') }}" class="nav-link">Journal</a>
+                <a href="{{ url_for('mood_tracking') }}" class="nav-link">Mood Tracking</a>
+                <a href="{{ url_for('mindfulness') }}" class="nav-link">Mindfulness</a>
+                <a href="{{ url_for('resources') }}" class="nav-link">Resources</a>
+                <a href="{{ url_for('profile') }}" class="nav-link">Profile</a>
+                <a href="{{ url_for('logout') }}" class="btn btn--outline">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert--{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        <div class="dashboard">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h1>Welcome back, {{ current_user.username }}!</h1>
+                    <p>Here's your mental health journey overview</p>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">💬</div>
+                        <span class="stat-number">{{ stats.total_chats }}</span>
+                        <span class="stat-label">Chat Sessions</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <span class="stat-number">{{ stats.total_journal_entries }}</span>
+                        <span class="stat-label">Journal Entries</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <span class="stat-number">{{ stats.recent_mood if stats.recent_mood else 'N/A' }}</span>
+                        <span class="stat-label">Latest Mood Score</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <span class="stat-number">{{ stats.days_active }}</span>
+                        <span class="stat-label">Days Active</span>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>What would you like to do today?</h2>
+                    <div class="actions-grid">
+                        <a href="{{ url_for('chat') }}" class="action-card">
+                            <div class="action-icon">💭</div>
+                            <h3>Start a Chat</h3>
+                            <p>Talk to our AI companion about anything on your mind</p>
+                        </a>
+                        <a href="{{ url_for('journal') }}" class="action-card">
+                            <div class="action-icon">✍️</div>
+                            <h3>Write in Journal</h3>
+                            <p>Record your thoughts and feelings in a safe space</p>
+                        </a>
+                        <a href="{{ url_for('mood_tracking') }}" class="action-card">
+                            <div class="action-icon">🎯</div>
+                            <h3>Track Your Mood</h3>
+                            <p>Log how you're feeling today and see your progress</p>
+                        </a>
+                        <a href="{{ url_for('mindfulness') }}" class="action-card">
+                            <div class="action-icon">🧘</div>
+                            <h3>Practice Mindfulness</h3>
+                            <p>Try breathing exercises and meditation techniques</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mental Health Tips -->
+                <div class="daily-tip">
+                    <h2>💡 Today's Mental Health Tip</h2>
+                    <div class="tip-card">
+                        <p><strong>Practice the 3-3-3 Rule for Anxiety:</strong></p>
+                        <p>When feeling anxious, name 3 things you can see, 3 sounds you can hear, and move 3 parts of your body. This simple grounding technique can help bring you back to the present moment.</p>
+                    </div>
+                </div>
+
+                <!-- Crisis Resources (Always Visible) -->
+                <div class="crisis-resources">
+                    <h2>🆘 Need Immediate Help?</h2>
+                    <div class="crisis-grid">
+                        <div class="crisis-item">
+                            <strong>National Suicide Prevention Lifeline</strong>
+                            <span>988</span>
+                        </div>
+                        <div class="crisis-item">
+                            <strong>Crisis Text Line</strong>
+                            <span>Text HOME to 741741</span>
+                        </div>
+                        <div class="crisis-item">
+                            <strong>Emergency Services</strong>
+                            <span>911</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

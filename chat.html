@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - MindCare AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="{{ url_for('dashboard') }}">
+                    <h2>🧠 MindCare AI</h2>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a>
+                <a href="{{ url_for('chat') }}" class="nav-link active">Chat</a>
+                <a href="{{ url_for('journal') }}" class="nav-link">Journal</a>
+                <a href="{{ url_for('mood_tracking') }}" class="nav-link">Mood Tracking</a>
+                <a href="{{ url_for('mindfulness') }}" class="nav-link">Mindfulness</a>
+                <a href="{{ url_for('resources') }}" class="nav-link">Resources</a>
+                <a href="{{ url_for('profile') }}" class="nav-link">Profile</a>
+                <a href="{{ url_for('logout') }}" class="btn btn--outline">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert--{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>💬 Chat with MindCare AI</h2>
+                <p>Share what's on your mind. I'm here to listen and support you.</p>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.is_user_message %}
+                            <div class="message message--user">
+                                <div class="message-content">{{ message.message_text }}</div>
+                                <div class="message-time">{{ message.timestamp.strftime('%Y-%m-%d %H:%M') }}</div>
+                            </div>
+                        {% else %}
+                            <div class="message message--ai {% if message.is_crisis %}message--crisis{% endif %}">
+                                <div class="message-content">{{ message.message_text|replace('\n', '<br>')|safe }}</div>
+                                <div class="message-time">{{ message.timestamp.strftime('%Y-%m-%d %H:%M') }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="welcome-message">
+                        <div class="welcome-icon">🤖</div>
+                        <h3>Hello! I'm your MindCare AI companion.</h3>
+                        <p>I'm here to provide emotional support, listen to your concerns, and help you navigate through difficult times. Feel free to share anything that's on your mind - there's no judgment here, just understanding and support.</p>
+                        <p><strong>Remember:</strong> While I'm here to help, I'm not a replacement for professional mental health care. If you're in crisis or need immediate help, please reach out to emergency services or a crisis hotline.</p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="chat-input-container">
+                <form method="POST" action="{{ url_for('send_message') }}" class="chat-input-form">
+                    <textarea name="message" class="chat-input" placeholder="Type your message here... Share what's on your mind." rows="3" required maxlength="1000"></textarea>
+                    <button type="submit" class="chat-send-btn">
+                        <span>Send</span>
+                        <span class="send-icon">📤</span>
+                    </button>
+                </form>
+                <div class="input-help">
+                    <small>💡 You can talk about anything: feelings, stress, anxiety, depression, relationships, school, or whatever's bothering you.</small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Auto-scroll to bottom of chat
+        const chatMessages = document.getElementById('chatMessages');
+        if (chatMessages) {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Auto-resize textarea
+        const textarea = document.querySelector('.chat-input');
+        if (textarea) {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+
+            // Submit on Enter (but not Shift+Enter)
+            textarea.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.form.submit();
+                }
+            });
+        }
+
+        // Focus on input when page loads
+        if (textarea) {
+            textarea.focus();
+        }
+    </script>
+</body>
+</html>

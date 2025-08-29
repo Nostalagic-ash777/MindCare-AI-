@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MindCare AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="{{ url_for('index') }}">
+                    <h2>🧠 MindCare AI</h2>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert--{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>Join MindCare AI</h2>
+                    <p>Create your account to start your mental health journey with our AI companion.</p>
+                </div>
+                
+                <form method="POST" class="auth-form">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" name="username" class="form-input" required 
+                               placeholder="Choose a unique username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-input" required 
+                               placeholder="your.email@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-input" required 
+                               placeholder="Create a secure password" minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="privacy-notice">
+                            <p><small>
+                                By creating an account, you agree that:
+                                <br>• Your conversations will be kept completely confidential
+                                <br>• This service is for support, not emergency situations
+                                <br>• You'll contact emergency services (911) if in immediate danger
+                            </small></p>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn--primary btn--full">Create Account</button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="{{ url_for('login') }}">Sign in here</a></p>
+                </div>
+                
+                <div class="crisis-notice">
+                    <p><strong>🆘 In Crisis?</strong></p>
+                    <p>If you're having thoughts of suicide or self-harm, please reach out immediately:</p>
+                    <ul>
+                        <li><strong>National Suicide Prevention Lifeline:</strong> 988</li>
+                        <li><strong>Crisis Text Line:</strong> Text HOME to 741741</li>
+                        <li><strong>Emergency Services:</strong> 911</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
